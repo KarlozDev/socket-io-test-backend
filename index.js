@@ -1,5 +1,7 @@
 const http = require("http");
 
+const port = process.env.PORT || 3000;
+
 const server = http.createServer();
 
 const io = require("socket.io")(server, { cors: { origin: "*" } });
@@ -15,4 +17,6 @@ io.on("connection", (socket) => {
     socket.emit("updateText", textUpd === "" ? "Mongola" : textUpd)
 })
 
-server.listen(3000);
+server.listen(port, () => {
+    console.log(`Puerto establecido en: ${port}`)
+});
